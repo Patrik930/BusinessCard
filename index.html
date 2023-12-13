@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <title>Document</title>
+    <style>
+      .container{
+        justify-content: center;
+        margin-top: 20px;
+      }
+      :root {
+        --textColor: black;
+        --borderColor: black;
+        --borderSize:1px;
+        --fontSize:16px;
+        --borderRadius:1px;
+        --bgColor: lime;
+        --imgTop: 0;
+        --imgLeft: 0;
+      }
+      .business{
+        background-color: var(--bgColor);
+        color: var(--textColor);
+        border: var(--borderColor) solid var(--borderSize);
+        border-radius: var(--borderRadius);
+        width: 350px;
+        position: relative;
+
+      }
+      h1{
+        font-size: var(--fontSize);
+
+      }
+      img {
+        position: absolute;
+        top:var(--imgTop);
+        left:var(--imgLeft);
+        width: 150px;
+      }
+      
+      .form{
+        background-color: rgb(36 , 37, 38);
+        color: rgb(176, 179, 184);
+        border: 5px solid black;
+        max-width: 350px;
+        height: 675px;
+        border-radius:2rem;
+      }
+      .btop{
+        border-top: dashed red
+      }
+    </style>
+  </head>
+  <body>
+    <div class="d-flex container" onchange="update(event)">
+
+
+        <form class="form text-center mr-5">
+          <label for="name"></label>
+          <input class="mt-3" type="text" id="name" placeholder="Neved"><br></br>
+            <input type="file" name="" id="photo" accept="image/*" onchange="add(this)"><br></br>
+          <label for="job"></label>
+          <input type="text" id="job" placeholder="Munka"><br></br>
+          <label for="emoji"></label>
+          <input type="text" id="emoji" placeholder="Emoji"><br></br>
+        <input class="mt-2 submit" type="button" value="Submit" onclick="a()" /><br></br>
+        <div class="btop"></div>
+        <label for="bgColor">Background-color:</label>
+        <input class="mt-5" type="color" id="bgColor"><br></br>
+        <label for="textColor">Text-color:</label>
+        <input type="color" id="textColor"><br></br>
+        <label for="borderColor">Border-color:</label>
+        <input type="color" id="borderColor"><br></br>
+        <label for="borderSize">Border-size:</label>
+        <input type="range" id="borderSize" min="10" max="100"><br></br>
+        <label for="fontSize">Font-size:</label>
+        <input type="range" id="fontSize" min="10" max="100"><br></br>
+        <label for="borderRadius">Border-radius:</label>
+        <input type="range" id="borderRadius" min="10" max="100">
+        </form>
+
+        <div class="business">
+          <h1 id="nev"></h1>
+          <h2 id="munka"></h2>
+          <h3 id="emoji1"></h3>
+          <img id="avatar" src="" alt="">
+        </div>
+
+
+
+    </div>
+    <script>
+        function update(e){
+            let val = e.target.type == 'range' ? e.target.value + 'px' : e.target.value
+            let cssVarName = '--' + e.target.id
+            document.body.style.setProperty(cssVarName,val)
+
+
+        }
+
+        function a(){
+          const nev = document.getElementById("nev")
+          const nameInput = document.getElementById("name")
+          const  munka = document.getElementById("munka")
+          const jobInput = document.getElementById("job")
+          const emoji1 = document.getElementById("emoji1")
+          const emojiInput = document.getElementById("emoji")
+          nev.innerHTML = nameInput.value
+          munka.innerHTML = jobInput.value
+          emoji1.innerHTML = emojiInput.value
+        }
+        function add(domObj) {
+            console.log(domObj.files[0]);
+            // Ellenőrizze, hogy van-e kiválasztott fájl
+            const reader = new FileReader();
+            if (domObj.files && domObj.files[0]) {         
+                // Beállítja a kiválasztott fájlt a FileReader objektumra
+                reader.onload =(e=>document.getElementById('avatar').src=e.target.result)
+                // Olvassa be a kiválasztott fájlt mint adat URL-t
+                reader.readAsDataURL(domObj.files[0]);
+                };   
+            }
+
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+  </body>
+</html>
